@@ -55,12 +55,12 @@ Your current project already provides the React with TypeScript boilerplate. The
 
 We will rely on a few key libraries to build out the frontend functionality:
 
-*   **React & TypeScript:** (Already set up) These form the core of our application, providing a component-based UI and type safety.
-*   **`react-router-dom`:** For client-side routing, allowing us to navigate between different "pages" or views without full page reloads.
-    *   **Installation:** `npm install react-router-dom`
-*   **`axios`:** A popular, promise-based HTTP client for making requests to the backend API. While `fetch` is built-in, `axios` offers a slightly nicer API, automatic JSON parsing, and better error handling.
-    *   **Installation:** `npm install axios`
-*   **State Management (React Context API):** For managing application-wide state (like the list of ToDo items, user authentication status, etc.). For a project of this scope, React's built-in Context API is often sufficient and avoids external library overhead. If the application grows significantly, you might consider libraries like Zustand or Redux Toolkit, but start with Context.
+- **React & TypeScript:** (Already set up) These form the core of our application, providing a component-based UI and type safety.
+- **`react-router-dom`:** For client-side routing, allowing us to navigate between different "pages" or views without full page reloads.
+  - **Installation:** `npm install react-router-dom`
+- **`axios`:** A popular, promise-based HTTP client for making requests to the backend API. While `fetch` is built-in, `axios` offers a slightly nicer API, automatic JSON parsing, and better error handling.
+  - **Installation:** `npm install axios`
+- **State Management (React Context API):** For managing application-wide state (like the list of ToDo items, user authentication status, etc.). For a project of this scope, React's built-in Context API is often sufficient and avoids external library overhead. If the application grows significantly, you might consider libraries like Zustand or Redux Toolkit, but start with Context.
 
 ### 3.3 Folder Structure within `frontend/src`
 
@@ -94,21 +94,21 @@ frontend/
 
 ### 3.4 Component Design Principles
 
-*   **Atomic Design:** Think about breaking your UI into small, reusable components (atoms, molecules, organisms, templates, pages). This promotes reusability and maintainability.
-*   **Single Responsibility Principle:** Each component should ideally do one thing well.
-*   **Presentational vs. Container Components:**
-    *   **Presentational (or Dumb) Components:** Focus solely on how things look. They receive data and callbacks via props and have no direct dependency on the application's state management. (e.g., `TodoItem`, `Button`).
-    *   **Container (or Smart) Components):** Focus on how things work. They manage state, fetch data, and pass data/callbacks to presentational components. (e.g., `TodoListContainer`, `HomePage`).
+- **Atomic Design:** Think about breaking your UI into small, reusable components (atoms, molecules, organisms, templates, pages). This promotes reusability and maintainability.
+- **Single Responsibility Principle:** Each component should ideally do one thing well.
+- **Presentational vs. Container Components:**
+  - **Presentational (or Dumb) Components:** Focus solely on how things look. They receive data and callbacks via props and have no direct dependency on the application's state management. (e.g., `TodoItem`, `Button`).
+  - **Container (or Smart) Components:** Focus on how things work. They manage state, fetch data, and pass data/callbacks to presentational components. (e.g., `TodoListContainer`, `HomePage`).
 
 **Examples of Components for a ToDo App:**
 
-*   `ui/Button.tsx`: A generic button component.
-*   `ui/Input.tsx`: A generic text input field.
-*   `common/TodoItem.tsx`: Displays a single ToDo item (title, checkbox, delete button).
-*   `common/TodoList.tsx`: Renders a list of `TodoItem` components.
-*   `common/AddTodoForm.tsx`: Input form for adding new todos.
-*   `layout/Header.tsx`, `layout/Footer.tsx`: For common layout elements.
-*   `pages/HomePage.tsx`: Orchestrates `AddTodoForm` and `TodoList`.
+- `ui/Button.tsx`: A generic button component.
+- `ui/Input.tsx`: A generic text input field.
+- `common/TodoItem.tsx`: Displays a single ToDo item (title, checkbox, delete button).
+- `common/TodoList.tsx`: Renders a list of `TodoItem` components.
+- `common/AddTodoForm.tsx`: Input form for adding new todos.
+- `layout/Header.tsx`, `layout/Footer.tsx`: For common layout elements.
+- `pages/HomePage.tsx`: Orchestrates `AddTodoForm` and `TodoList`.
 
 ### 3.5 API Integration
 
@@ -132,33 +132,6 @@ All communication with the backend will go through a dedicated `api` layer.
 
 2.  **Create API Client:** In `frontend/src/api/todoApi.ts`, create functions to encapsulate API calls using `axios`.
 
-    ```typescript
-    // frontend/src/api/todoApi.ts
-    import axios from 'axios';
-    import { TodoItem, CreateTodoItemDto } from '../types/todo';
-
-    const API_BASE_URL = 'http://localhost:5000/api'; // Update with your backend URL
-
-    export const getTodos = async (): Promise<TodoItem[]> => {
-      const response = await axios.get<TodoItem[]>(`${API_BASE_URL}/todos`);
-      return response.data;
-    };
-
-    export const createTodo = async (newTodo: CreateTodoItemDto): Promise<TodoItem> => {
-      const response = await axios.post<TodoItem>(`${API_BASE_URL}/todos`, newTodo);
-      return response.data;
-    };
-
-    export const updateTodo = async (id: string, updatedTodo: TodoItem): Promise<TodoItem> => {
-      const response = await axios.put<TodoItem>(`${API_BASE_URL}/todos/${id}`, updatedTodo);
-      return response.data;
-    };
-
-    export const deleteTodo = async (id: string): Promise<void> => {
-      await axios.delete(`${API_BASE_URL}/todos/${id}`);
-    };
-    ```
-
 3.  **Integrate with Components/Context:** Use these API functions within your Context providers or custom hooks to fetch and manipulate data, updating the local state accordingly. Handle loading, success, and error states appropriately.
 
 ### 3.6 Routing
@@ -169,25 +142,25 @@ Use `react-router-dom` to manage navigation within your single-page application.
 
     ```typescript
     // frontend/src/App.tsx
-    import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-    import HomePage from './pages/HomePage';
-    import NotFoundPage from './pages/NotFoundPage';
+    import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+    import HomePage from "./pages/HomePage";
+    import NotFoundPage from "./pages/NotFoundPage";
     // Import your TodoContextProvider here
 
     function App() {
       return (
         // <TodoContextProvider> // Wrap with your context provider
-          <Router>
-            <div className="App">
-              {/* Optional: Header goes here */}
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                {/* Potentially other routes, e.g., /todo/:id for details */}
-                <Route path="*" element={<NotFoundPage />} />
-              </Routes>
-              {/* Optional: Footer goes here */}
-            </div>
-          </Router>
+        <Router>
+          <div className="App">
+            {/* Optional: Header goes here */}
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              {/* Potentially other routes, e.g., /todo/:id for details */}
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+            {/* Optional: Footer goes here */}
+          </div>
+        </Router>
         // </TodoContextProvider>
       );
     }
@@ -199,10 +172,10 @@ Use `react-router-dom` to manage navigation within your single-page application.
 
 You have several options for styling your React application:
 
-*   **CSS Modules (Recommended for component-scoped styles):** This is often the default with Vite. It allows you to write regular CSS, but scopes it to specific components to prevent style collisions. (e.g., `ComponentName.module.css`).
-*   **Global CSS:** For base styles and utilities (`index.css`).
-*   **Tailwind CSS:** A utility-first CSS framework that allows for rapid UI development by composing utility classes directly in your markup. (Requires installation and configuration).
-*   **Styled Components / Emotion:** CSS-in-JS libraries for writing component-scoped styles directly in your JavaScript/TypeScript files.
+- **CSS Modules (Recommended for component-scoped styles):** This is often the default with Vite. It allows you to write regular CSS, but scopes it to specific components to prevent style collisions. (e.g., `ComponentName.module.css`).
+- **Global CSS:** For base styles and utilities (`index.css`).
+- **Tailwind CSS:** A utility-first CSS framework that allows for rapid UI development by composing utility classes directly in your markup. (Requires installation and configuration).
+- **Styled Components / Emotion:** CSS-in-JS libraries for writing component-scoped styles directly in your JavaScript/TypeScript files.
 
 For this project, a combination of global CSS (for resets/base styles) and CSS Modules (for component-specific styles) is a good, straightforward approach.
 
@@ -266,9 +239,10 @@ backend/
 We'll use Entity Framework Core (EF Core) as our Object-Relational Mapper (ORM) to interact with the database.
 
 1.  **Database Choice:**
-    *   **SQLite (Recommended for development):** Simple, file-based, zero-configuration database, excellent for local development and learning.
-    *   **SQL Server (Recommended for production/scalability):** A more robust RDBMS.
-    We will proceed with SQLite for simplicity in this guide.
+
+    - **SQLite (Recommended for development):** Simple, file-based, zero-configuration database, excellent for local development and learning.
+    - **SQL Server (Recommended for production/scalability):** A more robust RDBMS.
+      We will proceed with SQLite for simplicity in this guide.
 
 2.  **`TodoItem` Model:**
     Define your entity that maps to a database table.
@@ -284,7 +258,7 @@ We'll use Entity Framework Core (EF Core) as our Object-Relational Mapper (ORM) 
         {
             [Key]
             public Guid Id { get; set; } // Using Guid for unique identifiers
-            
+
             [Required]
             [MaxLength(200)]
             public string Title { get; set; }
@@ -377,23 +351,24 @@ We'll use Entity Framework Core (EF Core) as our Object-Relational Mapper (ORM) 
 6.  **EF Core Migrations:**
     Migrations allow you to evolve your database schema as your `Models` change.
 
-    *   **Initial Migration:** Open your terminal in the `ToDoList/backend` directory and run:
-        ```bash
-        dotnet ef migrations add InitialCreate -o Data/Migrations
-        ```
-        This command creates a `Migrations` folder with a snapshot of your current `DbContext` schema.
-    *   **Apply Migration:**
-        ```bash
-        dotnet ef database update
-        ```
-        This command applies the pending migrations to your database, creating the `ToDoList.db` file and the `TodoItems` table.
+    - **Initial Migration:** Open your terminal in the `ToDoList/backend` directory and run:
+      ```bash
+      dotnet ef migrations add InitialCreate -o Data/Migrations
+      ```
+      This command creates a `Migrations` folder with a snapshot of your current `DbContext` schema.
+    - **Apply Migration:**
+      ```bash
+      dotnet ef database update
+      ```
+      This command applies the pending migrations to your database, creating the `ToDoList.db` file and the `TodoItems` table.
 
 ### 4.4 DTOs (Data Transfer Objects)
 
 DTOs are simple classes used to transfer data between process boundaries (e.g., between the client and the server). They help to:
-*   **Decouple:** Separate your domain models from your API contract.
-*   **Shape Data:** Provide only the necessary data for a given operation, preventing over-fetching or over-posting.
-*   **Validate:** Apply validation attributes relevant to API input.
+
+- **Decouple:** Separate your domain models from your API contract.
+- **Shape Data:** Provide only the necessary data for a given operation, preventing over-fetching or over-posting.
+- **Validate:** Apply validation attributes relevant to API input.
 
 ```csharp
 // backend/DTOs/TodoItemDto.cs
@@ -690,36 +665,39 @@ The service layer contains your application's business rules and orchestrates op
     }
     ```
 
-    *   **AutoMapper:** You'll need AutoMapper to easily map between Models and DTOs.
-        *   **Installation:** `dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection` (already mentioned in 4.1.4)
-        *   **Mapping Profile:** Create a `MappingProfile.cs` in the root of `backend` (or a `Configurations` folder).
+    - **AutoMapper:** You'll need AutoMapper to easily map between Models and DTOs.
 
-        ```csharp
-        // backend/MappingProfile.cs
-        using AutoMapper;
-        using ToDoList.Api.DTOs;
-        using ToDoList.Api.Models;
+      - **Installation:** `dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection` (already mentioned in 4.1.4)
+      - **Mapping Profile:** Create a `MappingProfile.cs` in the root of `backend` (or a `Configurations` folder).
 
-        namespace ToDoList.Api
-        {
-            public class MappingProfile : Profile
-            {
-                public MappingProfile()
-                {
-                    CreateMap<TodoItem, TodoItemDto>();
-                    CreateMap<CreateTodoItemDto, TodoItem>();
-                    CreateMap<UpdateTodoItemDto, TodoItem>();
-                }
-            }
-        }
-        ```
-        *   **Register AutoMapper in `Program.cs`:**
-        ```csharp
-        // backend/Program.cs (excerpt)
-        // ...
-        builder.Services.AddAutoMapper(typeof(Program)); // Scans for MappingProfiles
-        // ...
-        ```
+      ```csharp
+      // backend/MappingProfile.cs
+      using AutoMapper;
+      using ToDoList.Api.DTOs;
+      using ToDoList.Api.Models;
+
+      namespace ToDoList.Api
+      {
+          public class MappingProfile : Profile
+          {
+              public MappingProfile()
+              {
+                  CreateMap<TodoItem, TodoItemDto>();
+                  CreateMap<CreateTodoItemDto, TodoItem>();
+                  CreateMap<UpdateTodoItemDto, TodoItem>();
+              }
+          }
+      }
+      ```
+
+      - **Register AutoMapper in `Program.cs`:**
+
+      ```csharp
+      // backend/Program.cs (excerpt)
+      // ...
+      builder.Services.AddAutoMapper(typeof(Program)); // Scans for MappingProfiles
+      // ...
+      ```
 
 ### 4.7 Controllers
 
@@ -867,9 +845,9 @@ app.Run();
 
 The frontend and backend communicate via HTTP requests, typically using RESTful principles.
 
-*   **API Calls:** The React frontend will make HTTP requests (GET, POST, PUT, DELETE) to the C# backend's API endpoints.
-*   **Data Format:** JSON (JavaScript Object Notation) will be the standard format for exchanging data between the frontend and backend. The frontend will send JSON in request bodies, and the backend will respond with JSON.
-*   **CORS (Cross-Origin Resource Sharing):** Since your frontend and backend will likely run on different ports (e.g., frontend on `localhost:5173`, backend on `localhost:5000` or `localhost:5001`), the browser enforces a security measure called CORS. The backend must be configured to explicitly allow requests from your frontend's origin. We've set this up in `Program.cs` on the backend.
+- **API Calls:** The React frontend will make HTTP requests (GET, POST, PUT, DELETE) to the C# backend's API endpoints.
+- **Data Format:** JSON (JavaScript Object Notation) will be the standard format for exchanging data between the frontend and backend. The frontend will send JSON in request bodies, and the backend will respond with JSON.
+- **CORS (Cross-Origin Resource Sharing):** Since your frontend and backend will likely run on different ports (e.g., frontend on `localhost:5173`, backend on `localhost:5000` or `localhost:5001`), the browser enforces a security measure called CORS. The backend must be configured to explicitly allow requests from your frontend's origin. We've set this up in `Program.cs` on the backend.
 
 **Example Interaction Flow: Adding a New ToDo Item**
 
