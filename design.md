@@ -875,3 +875,5 @@ You now have a detailed architectural plan and step-by-step instructions for bui
 Remember to leverage TypeScript for strong typing, use `dotnet watch run` for backend development (auto-reloading), and `npm run dev` (from `frontend` directory) for frontend development.
 
 Good luck with your learning journey!
+
+https://v0.app/chat/to-do-list-app-iwpYmRsLsdM?ref=3LUI90
