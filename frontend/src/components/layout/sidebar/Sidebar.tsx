@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styles from "./Sidebar.module.css";
 import { ProjectIndicator } from "./components/ProjectIndicator";
 
@@ -7,11 +7,23 @@ export const Sidebar = () => {
     <div className={styles.sidebar}>
       <div className={styles.header}>Focus List</div>
       <nav className={styles.navigation}>
-        <Link to="/">Dashboard</Link>
-        <Link to="/projects">Projects</Link>
-        <Link to="/Calendar">Calendar</Link>
-        <Link to="/Statistics">Statistics</Link>
-        <Link to="/settings">Settings</Link>
+        {[
+          { to: "/", label: "Dashboard" },
+          { to: "/projects", label: "Projects" },
+          { to: "/Calendar", label: "Calendar" },
+          { to: "/Statistics", label: "Statistics" },
+          { to: "/settings", label: "Settings" },
+        ].map(({ to, label }) => (
+          <NavLink
+            key={to}
+            to={to}
+            className={({ isActive }) =>
+              isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
+            }
+          >
+            {label}
+          </NavLink>
+        ))}
       </nav>
 
       <div className={styles.projects}>

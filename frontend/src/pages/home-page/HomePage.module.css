@@ -4,6 +4,7 @@
   gap: 10px;
   padding: 10px 10px;
   outline: solid;
+  outline-color: grey;
   flex: 1;
   height: 100%;
 }
