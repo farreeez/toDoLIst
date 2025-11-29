@@ -1,0 +1,23 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  flex: 0 0 10%;
+}
+
+.navigation {
+  flex: 0 0 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.projects {
+  flex: 0 0 10%;
+}
+
+.profile {
+  flex: 0 0 10%;
+}

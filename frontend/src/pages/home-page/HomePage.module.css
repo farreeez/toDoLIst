@@ -4,6 +4,8 @@
   gap: 10px;
   padding: 10px 10px;
   outline: solid;
+  flex: 1;
+  height: 100%;
 }
 
 .todoItemsContainer {
