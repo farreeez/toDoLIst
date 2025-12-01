@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Sidebar } from "./components/layout/sidebar/Sidebar.tsx";
-import HomePage from "./pages/home-page/HomePage.tsx";
+import DashBoard from "./pages/home-page/DashBoard.tsx";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       </div>
       <div className="content">
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<DashBoard />} />
         </Routes>
       </div>
     </div>

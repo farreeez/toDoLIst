@@ -5,6 +5,7 @@
   padding: 10px 10px;
   outline: solid;
   outline-color: grey;
+  background-color: rgb(16, 16, 16);
   flex: 1;
   height: 100%;
 }
@@ -13,13 +14,6 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
-
-.todoContainer {
-  display: flex;
-  align-items: flex-start;
-  font-size: 15px;
-  user-select: none;
 }
 
 .todoContainer:hover {
